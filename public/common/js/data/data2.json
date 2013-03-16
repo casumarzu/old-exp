@@ -1,0 +1,26 @@
+{
+    "recipes": {
+    "total": 3,
+        "list": [{
+        "id": 1,
+        "name": "итем_6",
+        "pic": "http://cs305604.vk.me/u5731229/e_b112de8f.jpg"
+    }, {
+        "id": 2,
+        "name": "итем_7",
+        "pic": "http://cs305604.vk.me/u5731229/e_b112de8f.jpg"
+    }, {
+        "id": 3,
+        "name": "итем_8",
+        "pic": "http://cs305604.vk.me/u5731229/e_b112de8f.jpg"
+    }, {
+        "id": 4,
+        "name": "итем_9",
+        "pic": "http://cs305604.vk.me/u5731229/e_b112de8f.jpg"
+    }, {
+        "id": 5,
+        "name": "итем_10",
+        "pic": "http://cs305604.vk.me/u5731229/e_b112de8f.jpg"
+    }]
+}
+}
