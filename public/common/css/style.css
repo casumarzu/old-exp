@@ -6,3 +6,57 @@ body{}
 .paginator *{display: inline;}
 .item{float: left}
 .update{background: red;width: 100px;height: 100px;}
+
+
+
+.counter_item{
+    background: url("../img/login_counter_item_bg.png") no-repeat 0px 0px;
+    width: 47px;
+    height: 64px;
+    float: left;
+}
+
+.counter_item div{
+    width: 47px;
+    height: 64px;
+}
+
+.counter_item_0{
+    background: url("../img/login_count_0.png") no-repeat 0px 0px;
+}
+
+.counter_item_1{
+    background: url("../img/login_count_1.png") no-repeat 0px 0px;
+}
+
+.counter_item_2{
+    background: url("../img/login_count_2.png") no-repeat 0px 0px;
+}
+
+.counter_item_3{
+    background: url("../img/login_count_3.png") no-repeat 0px 0px;
+}
+
+.counter_item_4{
+    background: url("../img/login_count_4.png") no-repeat 0px 0px;
+}
+
+.counter_item_5{
+    background: url("../img/login_count_5.png") no-repeat 0px 0px;
+}
+
+.counter_item_6{
+    background: url("../img/login_count_6.png") no-repeat 0px 0px;
+}
+
+.counter_item_7{
+    background: url("../img/login_count_7.png") no-repeat 0px 0px;
+}
+
+.counter_item_8{
+    background: url("../img/login_count_8.png") no-repeat 0px 0px;
+}
+
+.counter_item_9{
+    background: url("../img/login_count_9.png") no-repeat 0px 0px;
+}

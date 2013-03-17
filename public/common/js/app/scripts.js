@@ -12,16 +12,26 @@ $(document).ready(function() {
 //
 //    object.trigger("alert", "событие");
 
-    ajax_ejs();
+//    ajax_ejs();
+
+    $('.for_text').bind('keyup',function(){
+        beauty_words( $(this).val() )
+    });
+
+
+function beauty_words( counter_text ){
+    counter_text = counter_text.split('');
+    $('.new_counter').html('');
+    for( i = 0; i < counter_text.length; i++){
+        $('.new_counter').append('<div class="counter_item"><div class="counter_item_'+counter_text[i]+'"></div></div>')
+    }
+}
 
 
 });
 
 
 function ajax_ejs(){
-
-
-
     $.ajax({
         url: 'common/js/data/data.json',
         dataType: 'json',
