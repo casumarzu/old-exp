@@ -60,3 +60,10 @@ body{}
 .counter_item_9{
     background: url("../img/login_count_9.png") no-repeat 0px 0px;
 }
+
+.rounded{
+    width: 100px;
+    height: 100px;
+    background: red;
+    border-radius: 60px;
+}
