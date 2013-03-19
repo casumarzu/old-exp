@@ -1,22 +1,88 @@
 var data = [];
 
 $(document).ready(function() {
-//
-//    var object = {};
-//
-//    _.extend(object, Backbone.Events);
-//
-//    object.on("alert", function(msg) {
-//        alert("Сработало " + msg);
-//    });
-//
-//    object.trigger("alert", "событие");
 
-//    ajax_ejs();
+
+
+
+    var Movie = Backbone.Model.extend({});
+
+    matrix = new Movie({
+        title: 'The Matrix',
+        format: 'dvd'
+    });
+
+    horror = new Movie({
+        title: 'The horror',
+        format: 'hd'
+    });
+
+
+    matrix.set({
+        year: '1999'
+    });
+
+    matrix.get('year');
+
+    var MovieList = Backbone.Collection.extend({
+        model: Movie
+    });
+
+    var library = new MovieList();
+
+    library.add({
+        title: "The Big Lebowski",
+        format: "VHS"
+    });
+
+
+
+    isLocalStorageAvailable();
+
+//    localStorage.setItem('foo', 'bar');
+//    var foo = localStorage.getItem('foo');
+//    alert(foo); //bar
+
+
+
+
+/*
+     try {
+     localStorage.setItem('foo', 'bar');
+     } catch (e) {
+     if (e == QUOTA_EXCEEDED_ERR) {
+     alert('Локальное хранилище переполнено');
+     }
+     }
+
+     localStorage.removeItem('foo'); //удалит элемент объекта
+     localStorage.clear(); //удалит все элементы
+    var foo = {1: [1, 2, 3]};
+    localStorage.setItem('foo', JSON.stringify(foo));
+    var fooFromLS = JSON.parse(localStorage.getItem('foo'));
+*/
 
     $('.for_text').bind('keyup',function(){
         beauty_words( $(this).val() )
     });
+
+
+
+//    $('.coord_block').bind('mousemove', function(event){
+//        var x = event.pageX;
+//        var y = event.pageY;
+//        $('.coord_block').text('X = '+event.pageX+', Y = '+event.pageY);
+//    });
+
+});
+
+function isLocalStorageAvailable() {
+    try {
+        return 'localStorage' in window && window['localStorage'] !== null;
+    } catch (e) {
+        return false;
+    }
+}
 
 
 function beauty_words( counter_text ){
@@ -26,11 +92,6 @@ function beauty_words( counter_text ){
         $('.new_counter').append('<div class="counter_item"><div class="counter_item_'+counter_text[i]+'"></div></div>')
     }
 }
-
-
-});
-
-
 function ajax_ejs(){
     $.ajax({
         url: 'common/js/data/data.json',
@@ -54,3 +115,43 @@ $(function() {
         });
     }
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
