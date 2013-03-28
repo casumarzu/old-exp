@@ -1,0 +1,223 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta charset="utf-8"> 
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+    <title></title>
+    <link rel="stylesheet" href="common/css/style.css" />
+    <!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+    <!--<script data-main="common/js/main.js" src="common/js/require.js"></script>-->
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="common/js/lib/PIE_IE678.js"></script>
+    <![endif]-->
+    <!--[if IE 9]>
+    <script type="text/javascript" src="common/js/lib/PIE_IE9.js"></script>
+    <![endif]-->
+<style type="text/css">
+  .play_button{
+    width: 120px;
+    height: 120px;
+    background: red;
+    /*opacity: 0.5;*/
+    position: absolute;
+    top: 107px;
+    left: 50%;
+    margin-left: -60px;
+    display: none;
+    cursor: pointer;
+  }
+  .pause_button{
+    width: 120px;
+    height: 120px;
+    background: blue;
+    /*opacity: 0.5;*/
+    position: absolute;
+    top: 107px;
+    left: 50%;
+    margin-left: -60px;
+    display: none;
+    cursor: pointer;
+  }
+  .stop_button{
+    width: 100px;
+    height: 100px;
+    background: green;
+    opacity: 0.5;
+    position: absolute;
+    top: 107px;
+    left: 162px;
+    cursor: pointer;
+  }
+  .duration{
+    background: red;
+    width: 100%;
+    height: 20px;
+    opacity: 0.5;
+    position: relative;
+  }
+  .duration> div{
+    background: blue;
+    opacity: 0.5;
+    width: 0%;
+    height: 20px;
+    cursor:pointer;
+  }
+  .volume{
+    background: green;
+    width: 100%;
+    height: 20px;
+    opacity: 0.5;
+    position: relative;
+  }
+  .volume > div{
+    background: orange;
+    opacity: 0.5;
+    width: 0;
+    height: 20px;
+    cursor:pointer;
+  }
+  .width{
+    display: none;
+  }
+  #parent_of_player{
+    width: 100%;
+    height: 356px;
+  }
+
+  #wrapper{
+    position: relative;
+    width: 500px;
+    margin: 0 auto;
+  }
+
+</style>
+
+</head>
+<body>
+<!-- 
+<iframe width="640" height="360" src="http://www.youtube.com/embed/sOOebk_dKFo?feature=player_detailpage" frameborder="0" allowfullscreen></iframe>
+ -->
+ <div id="wrapper">
+    <div id="parent_of_player">
+      <div id="ytapiplayer">
+        You need Flash player 8+ and JavaScript enabled to view this video.
+      </div>
+      <div class="play_button">PLAY</div>
+      <div class="pause_button">PAUSE</div>
+    </div>  
+    <div class="duration">
+      <div></div>
+    </div>
+    <div class="volume">
+      <div></div>
+    </div>
+</div>
+
+<!-- Scripts -->
+<script src="common/js/lib/jquery.js"></script>
+<script src="common/js/lib/underscore.js"></script>
+<script src="common/js/lib/backbone.js"></script>
+<!--<script src="common/js/lib/ember-1.0.0-rc.1.js"></script>-->
+<script src="common/js/lib/jquery.cookie.js"></script>
+<script src="common/js/lib/jquery.easing.1.3.js"></script>
+<!--<script src="common/js/lib/jquery.fancybox.pack.js"></script>-->
+<script src="common/js/lib/ejs.js"></script>
+<script src="common/js/lib/view.js"></script>
+<script src="common/js/lib/modernizr.custom.js"></script>
+<script src="common/js/lib/swfobject.js"></script>
+
+<script src="common/js/app/framework_my.js"></script>
+<script src="common/js/app/scripts.js"></script>
+<script src="common/js/app/pages.js"></script>
+  <script type="text/javascript">
+$(document).ready(function () {
+    $('#parent_of_player').bind('mouseover', function () {
+        if (ytplayer.getPlayerState() == '-1') {
+            $('.play_button').show();
+        } else if (ytplayer.getPlayerState() == '1') {
+            $('.pause_button').show();
+        } else if (ytplayer.getPlayerState() == '2') {
+            $('.play_button').show();
+        }
+    });
+    $('#parent_of_player').bind('mouseout', function () {
+        $('.play_button, .pause_button').hide();
+    });
+});
+
+var params = {
+    allowScriptAccess: "always"
+};
+var atts = {
+    id: "myytplayer"
+};
+swfobject.embedSWF("http://www.youtube.com/v/b051W41vrRc?enablejsapi=1&version=3&playerapiid=ytplayer&showinfo=0&controls=0&rel=0&autohide=1&loop=1",
+    "ytapiplayer", "100%", "356", "8", null, null, params, atts);
+
+function onYouTubePlayerReady(playerId) {
+    ytplayer = document.getElementById("myytplayer");
+}
+
+function play() {
+    if (ytplayer) {
+        ytplayer.playVideo();
+    }
+}
+
+function pause() {
+    if (ytplayer) {
+        ytplayer.pauseVideo();
+    }
+}
+
+setInterval(function () {
+    $('.duration > div').css('width', '' + (100 * ytplayer.getCurrentTime()) / ytplayer.getDuration() + '%');
+    Volume();
+    // console.log( ( 100 * ytplayer.getCurrentTime())/ytplayer.getDuration() )
+}, 1000)
+
+
+$('.play_button').bind('click', function () {
+    play();
+    $(this).hide();
+    $('.pause_button').show();
+});
+$('.pause_button').bind('click', function () {
+    pause();
+    $(this).hide();
+    $('.play_button').show();
+});
+$('.duration, .duration > div').bind('click', function () {
+    ytplayer.seekTo(parseInt($('.duration').attr('duration')));
+    $('.duration > div').css('width', '' + (100 * ytplayer.getCurrentTime()) / ytplayer.getDuration() + '%');
+})
+$('.duration').bind('mousemove', function (e) {
+
+ var x = e.pageX, offset = $(this).offset();
+    x -= offset.left;
+     $(this).attr('duration', '' + ((ytplayer.getDuration() * (x * 100) / parseInt($(this).width())) / 100) + '');
+});
+
+function Volume() {
+    $('.volume > div').css('width', '' + ytplayer.getVolume() + '%');
+}
+$('.volume').bind('mousemove', function (e) {
+  var x = e.pageX, offset = $(this).offset();
+    x -= offset.left;
+    $(this).attr('volume', '' + Math.round((x * 100) / parseInt($(this).width())) + '')
+});
+$('.volume, .volume > div').bind('click', function () {
+    ytplayer.setVolume('' + $('.volume').attr('volume') + '');
+    Volume();
+});
+// $(".duration").mousemove(function(e) {
+//     var x = e.pageX, y = e.pageY, offset = $(this).offset();
+//     x -= offset.left;
+//     y -= offset.top;
+//     console.log( x +' '+ y )
+// });
+
+  </script>
+
+</body>
+</html>

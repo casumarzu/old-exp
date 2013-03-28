@@ -2,9 +2,6 @@ var data = [];
 
 $(document).ready(function() {
 
-
-
-
     var Movie = Backbone.Model.extend({});
 
     matrix = new Movie({
@@ -16,7 +13,6 @@ $(document).ready(function() {
         title: 'The horror',
         format: 'hd'
     });
-
 
     matrix.set({
         year: '1999'
@@ -35,6 +31,18 @@ $(document).ready(function() {
         format: "VHS"
     });
 
+    var ItemView = Backbone.View.extend({
+        tagName: 'li'
+    });
+
+    var BodyView = Backbone.View.extend({
+        el: 'body'
+    });
+
+    var item = new ItemView();
+    var body = new BodyView();
+
+//    alert(item.el + ' ' + body.el);
 
 
     isLocalStorageAvailable();
@@ -42,9 +50,6 @@ $(document).ready(function() {
 //    localStorage.setItem('foo', 'bar');
 //    var foo = localStorage.getItem('foo');
 //    alert(foo); //bar
-
-
-
 
 /*
      try {
@@ -65,8 +70,6 @@ $(document).ready(function() {
     $('.for_text').bind('keyup',function(){
         beauty_words( $(this).val() )
     });
-
-
 
 //    $('.coord_block').bind('mousemove', function(event){
 //        var x = event.pageX;
@@ -115,43 +118,3 @@ $(function() {
         });
     }
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
