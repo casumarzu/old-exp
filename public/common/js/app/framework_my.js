@@ -142,3 +142,169 @@ Number.prototype.toCookTime = function(){
         //         'common/img/active_contests_button_bg.png',
         //         'common/img/search_for_recipes_videorecipes_right.jpg'
         // ]);
+
+
+
+
+
+
+    selects ();
+    function selects (){
+        var days = '32';
+        var months = [ '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12' ];
+        var years = '2014';
+        var current_select = '1';
+        get_days ();
+        current_day = '.registration_form_birthday_selects .month option:selected';
+
+        $('.registration_form_birthday_selects .month').bind('change', function(){
+            if( $(current_day).val() == '1' &&  $('.registration_form_birthday_selects .day option:selected').val() > '28'){
+                days = '29';
+                current_select = '28';
+                get_days ();
+            }else if( $(current_day).val() == '1' &&  $('.registration_form_birthday_selects .day option:selected').val() <= '28'){
+                days = '29';
+                current_select = $('.registration_form_birthday_selects .day option:selected').val();
+                get_days ();
+
+            }else if( (
+                ($(current_day).val() == '3') ||
+                ($(current_day).val() == '5') ||
+                ($(current_day).val() == '8') ||
+                ($(current_day).val() == '10')
+                ) &&  ($('.registration_form_birthday_selects .day option:selected').val() > '30') ){
+                days = '31';
+                current_select = '30';
+                get_days ();
+            }else if( (
+                ($(current_day).val() == '3') ||
+                ($(current_day).val() == '5') ||
+                ($(current_day).val() == '8') ||
+                ($(current_day).val() == '10')
+                ) &&  ($('.registration_form_birthday_selects .day option:selected').val() <= '30') ){
+                days = '31';
+                current_select = $('.registration_form_birthday_selects .day option:selected').val();
+                get_days ();
+            }else if( (
+                ($(current_day).val() == '0') ||
+                ($(current_day).val() == '1') ||
+                ($(current_day).val() == '2') ||
+                ($(current_day).val() == '4') ||
+                ($(current_day).val() == '6') ||
+                ($(current_day).val() == '7') ||
+                ($(current_day).val() == '9') ||
+                ($(current_day).val() == '11')
+                )){
+                days = '32';
+                current_select = $('.registration_form_birthday_selects .day option:selected').val();
+                get_days ();
+            }
+            
+        });
+
+        function get_days (){
+
+            $('.registration_form_birthday_selects .day').html('');
+            
+            for( d = 1; d < days; d++ ){
+                $('.registration_form_birthday_selects .day').append('<option value="' + d + '">' + d + '</option>');
+                $('.registration_form_birthday_selects .day option[value="'+ current_select +'"]').attr('selected','selected');
+            }
+            $("select").uniform();
+        }
+        
+        for( m = 0; m < months.length; m++ ){
+            $('.registration_form_birthday_selects .month').append('<option value="' + m + '">' + months[m] + '</option>');
+        }
+
+        for( y = 1913; y < years; y++ ){
+            $('.registration_form_birthday_selects .year').append('<option value="' + y + '">' + y + '</option>');
+        }
+        $("select").uniform();
+    };
+
+
+ // <div class="registration_form_birthday_selects">
+ //               <select class="day"></select>
+ //               <select class="month"></select>
+ //               <select class="year"></select>
+ //            </div>
+
+
+        (function paginator(){
+
+            var paginator_wrapper = $('.detailed_search_paginator');
+            var prev = $('.detailed_search_result_pagination_prev');
+            var next = $('.detailed_search_pagination_next');
+
+            paginator_wrapper.html('');
+
+            var to_page, start_page, all_pages = 5, middle_page = 3;
+            // где :
+            // to_page - конечная видимая страница,
+            // start_page - стартовая страница,
+            // all_pages - количество видимых страниц,
+            // middle_page - серединная видимая страница,
+            // total - общее количество страниц,
+            // page - текущая страница;
+
+            if( total <= 1 ){
+                paginator_wrapper.hide();
+                prev.hide();
+                next.hide();
+            }else{
+                paginator_wrapper.show();
+                prev.show();
+                next.show();
+            }
+
+            if( total == 0){
+                total = 1;
+            }
+
+            if( all_pages <= total ){
+                if(page >= 1 && page < middle_page){
+                    start_page = 1;
+                    to_page = all_pages + 1;
+                }else if(page == middle_page){
+                    start_page = page - (all_pages - middle_page);
+                    to_page = page + all_pages - middle_page + 1;
+                }else if( page > middle_page && total - page >= middle_page ){
+                    start_page = page - (all_pages - middle_page);
+                    to_page = page + (all_pages - middle_page) + 1;
+                }else if(total - page < middle_page){
+                    start_page = total - all_pages + 1;
+                    to_page = total + 1;
+                }
+            }else{
+                start_page = 1;
+                to_page = total + 1;
+            }
+            for( i = start_page; i < to_page; i++ ){
+                paginator_wrapper.append('<a class="paginator" page="'+ i +'">'+ i +'</a>');
+            }
+            paginator_wrapper.find('.paginator[page="'+page+'"]').addClass('current');
+
+        }());
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
